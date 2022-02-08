@@ -4,16 +4,12 @@ import java.util.ArrayList;
 import modelo.Vehiculo;
 import java.util.Arrays;
 
-import controlador.Metodos;
+import controlador.EntradaDatos;
 
 public class Garaje {
 	
 	private Vehiculo plazasTotales [][] = new Vehiculo[10][10];
 	private ArrayList<Vehiculo>cochesAveriados;
-	
-	
-	
-	
 	
 	
 	public Garaje(Vehiculo[][] plazasTotales, ArrayList<Vehiculo> cochesAveriados) {
@@ -24,27 +20,10 @@ public class Garaje {
 
 
 	public Garaje() {
-		Vehiculo[][] plazasTotales = new Vehiculo[0][0];
+		
 	}
 	
-	public void aparcar(Vehiculo vehiculo) {
-		
-				
-		plazasTotales[0][0] = vehiculo;
-		
-		for(int i = 0; i < plazasTotales.length; i++) {
-			for(int j = 0; j < plazasTotales[i].length; j++) {
-				
-				if(plazasTotales[i][j] == null) {
-					plazasTotales[i][j] = vehiculo;
-					break;
-				}
-				
-				
-			}
-		}
-		
-	}
+	
 
 	
 

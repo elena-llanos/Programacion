@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import conexion.Conexion;
-import controlador.EntradaDatos;
+import controlador.Metodos;
 import modelo.Cliente;
 import modelo.Vehiculo;
 import vista.GestionGaraje;

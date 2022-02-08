@@ -6,8 +6,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import conexion.Conexion;
-import controlador.EntradaDatos;
 import controlador.Metodos;
+import controlador.EntradaDatos;
 import modelo.Cliente;
 import modelo.Motor;
 import modelo.Vehiculo;
@@ -19,7 +19,7 @@ public class GestionGaraje {
 
 	public static void main(String[] args) {
 			//Conexion.abrirConexion();
-			Metodos.comprobarDNI();
+			EntradaDatos.comprobarDNI();
 
 			
 
