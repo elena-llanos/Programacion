@@ -155,7 +155,7 @@ public class LibreriaApp {
 			if (opt == 1) {
 				System.out.println("Indica el titulo del libro");
 				String titulo = teclado.nextLine();
-				ListaPublicaciones.comprobarLibro(titulo);
+				ListaPublicaciones.existeLibro(titulo);
 				
 			}else if (opt == 2) {
 				

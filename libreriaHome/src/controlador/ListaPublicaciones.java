@@ -24,15 +24,21 @@ public class ListaPublicaciones {
 		}
 		
 	}
-	public static Publicacion comprobarLibro(String titulo) {
+	public static boolean existeLibro(String titulo) {
 		
-		Libro libro = new Libro();
 		
 		for(int i=0; i < listadoPublicaciones.size(); i++) {
-			if (libro.getTitulo().equals(titulo));
+			Publicacion publicacion = listadoPublicaciones.get(i);
+			
+			if (publicacion instanceof Libro && ((Libro) publicacion).getTitulo().equals(titulo)) {
+				System.out.println("hola");
+				return true;
+				
+			}
+			
 		}
+		return false;
 		
-		return libro;
 	}
 
 }
