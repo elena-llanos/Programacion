@@ -30,8 +30,8 @@ public class ListaPublicaciones {
 		for(int i=0; i < listadoPublicaciones.size(); i++) {
 			Publicacion publicacion = listadoPublicaciones.get(i);
 			
-			if (publicacion instanceof Libro && ((Libro) publicacion).getTitulo().equals(titulo)) {
-				System.out.println("hola");
+			if (publicacion instanceof Libro && ((Libro) publicacion).getTitulo().equals(titulo) && publicacion.getUnidades() > 0) {
+				System.out.println("hola" + publicacion.getUnidades());
 				return true;
 				
 			}
