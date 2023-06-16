@@ -38,8 +38,7 @@ public class Ejercicio1 {
 		
 	}
 	
-	private static boolean repeatProcess() {
-		
+	private static boolean repeatProcess() {		
 		
 		String answer = Consola.rl("Repeat Process?");
 		
@@ -48,15 +47,7 @@ public class Ejercicio1 {
 		}else {
 			System.out.println("Aguuur");
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
 		return true;
 	}
 
