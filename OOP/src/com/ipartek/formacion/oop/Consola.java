@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class Consola {
 
 	private static final Scanner SC = new Scanner(System.in);
+	
+	public static void showError() {
+		System.err.println("Error");
+		
+	}
 
 	public static void pl(Object texto) {
 		System.out.println(texto);

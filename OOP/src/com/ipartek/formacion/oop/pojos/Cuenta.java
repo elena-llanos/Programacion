@@ -1,5 +1,7 @@
 package com.ipartek.formacion.oop.pojos;
 
+import java.util.Objects;
+
 public class Cuenta {
 	/*
 	 * + Escribe una clase Cuenta para representar una cuenta bancaria. Los datos de
@@ -64,7 +66,7 @@ public class Cuenta {
 				+ "\n " + "saldo:         " + saldo + "]";
 	}
 	
-	public boolean ingresar(double num) {
+	public  boolean ingresar(double num) {
 		
 		boolean ingresoCorrecto = true;
         if (num < 0) {
@@ -76,6 +78,25 @@ public class Cuenta {
         }
         return ingresoCorrecto;
 		
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(nombre, numeroCuenta, saldo, tipoInteres);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cuenta other = (Cuenta) obj;
+		return Objects.equals(nombre, other.nombre) && Objects.equals(numeroCuenta, other.numeroCuenta)
+				&& Double.doubleToLongBits(saldo) == Double.doubleToLongBits(other.saldo)
+				&& Double.doubleToLongBits(tipoInteres) == Double.doubleToLongBits(other.tipoInteres);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.ipartek.formacion.oop.pojos;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Producto {
 
@@ -55,6 +56,9 @@ public class Producto {
 	}
 
 	public void setId(long id) {
+		if(id != 0 && id < 0) {
+			throw new RuntimeException("No se admiten valores negativos para el id");
+		}
 		// this hace referencia al id que hemos definido arriba
 		this.id = id;
 	}
@@ -64,7 +68,10 @@ public class Producto {
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		if(nombre == null || nombre.trim().length() == 0) {
+			throw new RuntimeException("No se admiten valores nulos para nombre");
+		}
+		this.nombre = nombre.trim();
 	}
 
 	public BigDecimal getPrecio() {
@@ -72,6 +79,9 @@ public class Producto {
 	}
 
 	public void setPrecio(BigDecimal precio) {
+		if(precio == null || precio.compareTo(BigDecimal.ZERO) < 0) {
+			throw new RuntimeException("No se admiten valores negativos para precio");
+		}
 		this.precio = precio;
 	}
 
@@ -80,6 +90,10 @@ public class Producto {
 	}
 
 	public void setFechaCaducidad(LocalDate fechaCaducidad) {
+		if(fechaCaducidad != null && fechaCaducidad.compareTo(LocalDate.now()) <= 0) {
+			throw new RuntimeException("La caducidad debe ser mayor a la fecha de hoy");
+			
+		}
 		this.fechaCaducidad = fechaCaducidad;
 	}
 
@@ -94,11 +108,11 @@ public class Producto {
 	}
 
 	public String obtenerFicha() {
-		String ficha = "\nId:          " + id + 
-				"\nNombre:    " + nombre + 
-				"\nPrecio:    " + precio + 
-				"\nCaducidad: "	+ fechaCaducidad + 
-				"\n\n";
+		String ficha = "\nId:           " + id + 
+				"\nNombre:       " + nombre + 
+				"\nPrecio:       " + precio + 
+				"\nCaducidad:    "	+ fechaCaducidad + 
+				"\n";
 		return ficha;
 
 	}
@@ -123,6 +137,24 @@ public class Producto {
 		producto.setFechaCaducidad(caducidad );
 		
 		return producto;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(fechaCaducidad, id, nombre, precio);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Producto other = (Producto) obj;
+		return Objects.equals(fechaCaducidad, other.fechaCaducidad) && id == other.id
+				&& Objects.equals(nombre, other.nombre) && Objects.equals(precio, other.precio);
 	}
 	
 	

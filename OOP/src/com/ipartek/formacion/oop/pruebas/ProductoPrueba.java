@@ -1,6 +1,5 @@
 package com.ipartek.formacion.oop.pruebas;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -63,8 +62,6 @@ public class ProductoPrueba {
 		}
 	}
 
-	
-
 	/**
 	 * @param p
 	 */
@@ -79,9 +76,18 @@ public class ProductoPrueba {
 
 	private static Producto pedirProducto() {
 		Producto p = new Producto();
+		boolean wrong = true;
 
-		Long id = Consola.leerLong("Id");
-		p.setId(id);
+		do {
+			try {
+				Long id = Consola.leerLong("Id");
+				p.setId(id);
+				wrong = false;
+			} catch (Exception e) {
+				
+				Consola.showError();
+			}
+		} while (wrong);
 
 		String nombre = Consola.leerLinea("Nombre");
 		p.setNombre(nombre);
