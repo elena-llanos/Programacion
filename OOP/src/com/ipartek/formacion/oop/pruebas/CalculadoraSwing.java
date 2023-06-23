@@ -22,7 +22,7 @@ public class CalculadoraSwing {
 	private double op1;
 	private String op;
 	private double op2;
-	private double res;
+	private static final String ERROR = "****ERROR****";
 
 	/**
 	 * Launch the application.
@@ -46,7 +46,7 @@ public class CalculadoraSwing {
 	public CalculadoraSwing() {
 		initialize();
 
-		String[] numeros = { "7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ",", "E" };
+		String[] numeros = { "7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ".", "E" };
 
 		JButton boton;
 
@@ -84,19 +84,20 @@ public class CalculadoraSwing {
 		JButton btnSumar = new JButton("+");
 		btnSumar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				op1 = Double.parseDouble(tfDisplay.getText());
+				op1 = leerPantalla();
 				op = "+";
-				tfDisplay.setText("");
+				limpiarPantalla();
 			}
+
 		});
 		pOperaciones.add(btnSumar);
 
 		JButton btnRestar = new JButton("-");
 		btnRestar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				op1 = Double.parseDouble(tfDisplay.getText());
+				op1 = leerPantalla();
 				op = "-";
-				tfDisplay.setText("");
+				limpiarPantalla();
 			}
 		});
 		pOperaciones.add(btnRestar);
@@ -104,9 +105,9 @@ public class CalculadoraSwing {
 		JButton btnMultiplicar = new JButton("X");
 		btnMultiplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				op1 = Double.parseDouble(tfDisplay.getText());
+				op1 = leerPantalla();
 				op = "*";
-				tfDisplay.setText("");
+				limpiarPantalla();
 			}
 		});
 		pOperaciones.add(btnMultiplicar);
@@ -114,9 +115,9 @@ public class CalculadoraSwing {
 		JButton btnDividir = new JButton("/");
 		btnDividir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				op1 = Double.parseDouble(tfDisplay.getText());
+				op1 = leerPantalla();
 				op = "/";
-				tfDisplay.setText("");
+				limpiarPantalla();
 			}
 		});
 		pOperaciones.add(btnDividir);
@@ -124,7 +125,8 @@ public class CalculadoraSwing {
 		JButton btnIgual = new JButton("=");
 		btnIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				op2 = Double.parseDouble(tfDisplay.getText());
+				double res = 0.0;
+				op2 = leerPantalla();
 
 				switch (op) {
 				case "+":
@@ -141,7 +143,7 @@ public class CalculadoraSwing {
 					break;
 				}
 
-				tfDisplay.setText(String.valueOf(res));
+				escribirEnPantalla(res);
 			}
 		});
 		pOperaciones.add(btnIgual);
@@ -165,13 +167,11 @@ public class CalculadoraSwing {
 		JButton btnMasMenos = new JButton("+/-");
 		btnMasMenos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String texto = tfDisplay.getText();
-				double num = Double.parseDouble(texto);
+				
+				double num =leerPantalla();
 
 				num *= -1;
-
-				texto = String.valueOf(num);
-				tfDisplay.setText(texto);
+				escribirEnPantalla(num);
 			}
 		});
 		pOperaciones2.add(btnMasMenos);
@@ -179,13 +179,12 @@ public class CalculadoraSwing {
 		JButton btnPorcentaje = new JButton("%");
 		btnPorcentaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String texto = tfDisplay.getText();
-				double num = Double.parseDouble(texto);
+				
+				double num = leerPantalla();
 
 				num /= 100;
 
-				texto = String.valueOf(num);
-				tfDisplay.setText(texto);
+				escribirEnPantalla(num);
 			}
 		});
 		pOperaciones2.add(btnPorcentaje);
@@ -195,4 +194,39 @@ public class CalculadoraSwing {
 		pNumeros.setLayout(new GridLayout(4, 3, 0, 0));
 	}
 
+	/**
+	 * @return
+	 */
+	private double leerPantalla() {
+		String texto = tfDisplay.getText();
+		String textoConPuntos = texto.replace(",", ".");
+		try {
+			return Double.parseDouble(textoConPuntos);
+		} catch (NumberFormatException e) {
+			escribirEnPantalla(ERROR);
+			throw e;
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void escribirEnPantalla(Double dato) {
+		String texto = String.valueOf(dato);
+		String textoConComas = texto.replace(".", ",");
+
+		if (textoConComas.endsWith(",0")) {
+			textoConComas = textoConComas.replace(",0", "");
+		}
+
+		escribirEnPantalla(textoConComas);
+	}
+
+	private void escribirEnPantalla(String texto) {
+		tfDisplay.setText(texto);
+	}
+
+	private void limpiarPantalla() {
+		escribirEnPantalla("0");
+	}
 }
